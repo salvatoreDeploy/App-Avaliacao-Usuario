@@ -7,10 +7,11 @@ class CreateUserService{
         const {name,admin = true} = request.body;
 
         const userRepository = getCustomRepository(UserRepository);
+        
 
         const user = userRepository.create({
             name,
-            admin
+            admin,
         });
 
         await userRepository.save(user);

@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import {AnswerRepository} from "../repositories/AnswerRepository";
-import {getCustomRepository} from "typeorm";
+import {Between,getCustomRepository} from "typeorm";
 import { Survey } from "../entities/Survey";
 
 
@@ -21,6 +21,16 @@ class CreateAnswerService{
         await surveyRepository.save(answers);
 
         return response.status(201).json(survey_id)
+    }
+
+    async dateByList(request: Request, response: Response){
+        const {date_init, date_end} = request.body;
+
+        const surveyRepository = getCustomRepository(AnswerRepository);
+
+        const filterDate = await surveyRepository.find({created_at: Between(date_init, date_end)});
+
+        return response.json(filterDate);
     }
 }
 

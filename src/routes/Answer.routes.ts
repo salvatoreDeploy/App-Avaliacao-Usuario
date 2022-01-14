@@ -7,5 +7,6 @@ const answerRoutes = Router();
 const createAnswerService = new CreateAnswerService()
 
 answerRoutes.post("/:id/submit", createAnswerService.create);
+answerRoutes.post("/filter", createAnswerService.dateByList);
 
 export {answerRoutes}
